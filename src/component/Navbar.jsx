@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Menu, X, Search, ShoppingCart } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
+  const navigate = useNavigate()
 
   return (
     <nav className="bg-white  fixed top-0 left-0 w-full z-50">
@@ -26,7 +28,7 @@ const Navbar = () => {
             active === "home" ? "text-indigo-600" : ""
           }`}
           onClick={() => setActive("home")}
-          >Home</li>
+          ><Link to={"/"}>Home</Link></li>
 
 
           <li 
@@ -47,18 +49,18 @@ const Navbar = () => {
             active === "contact" ? "text-indigo-600" : ""
           }`}
           onClick={() => setActive("contact")}
-          >Contact Us</li>
+          ><Link to={"/contact"}>Contact Us</Link></li>
 
         </ul>
 
         {/* 🔹 Right Icons */}
         <div className="hidden md:flex items-center space-x-5">
           <Search className="w-5 h-5 text-gray-600 cursor-pointer hover:text-indigo-600" />
-          <div className="relative">
+          <div onClick={() => navigate("/cart")} className="relative">
             <div className="w-2 h-2 rounded-full bg-[#FF6347] absolute -top-1.5 right-0"></div>
             <ShoppingCart className="w-5 h-5 text-gray-600 cursor-pointer hover:text-indigo-600" />
           </div>
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium shadow-sm transition">
+          <button onClick={() => setShowLogin(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium shadow-sm transition">
             Login
           </button>
         </div>
